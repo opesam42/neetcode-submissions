@@ -1,0 +1,52 @@
+from typing import List
+
+class Solution:
+
+    def binary_search(self, nums, left, right, target):
+        
+
+        while left < right:
+            mid = (left + right) // 2
+            
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                right = mid
+            else:
+                left = mid + 1
+            
+            # if nums[left] == target:
+            #     return left
+        if nums[left] == target:
+            return left
+        
+        return -1
+
+        
+
+    def search(self, nums, target):
+        left, right = 0, len(nums) - 1
+        
+        while left <= right:
+            mid = (left + right) // 2
+            
+            if nums[mid] == target:
+                return mid
+            
+            # Check which side is sorted
+            if nums[left] <= nums[mid]:  # LEFT side is sorted
+                if nums[left] <= target < nums[mid]:  # target in left
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            else:  # RIGHT side is sorted
+                if nums[mid] < target <= nums[right]:  # target in right
+                    left = mid + 1
+                else:
+                    right = mid - 1
+        
+        return -1
+            
+sol = Solution()
+result = sol.search([3, 1], 3)
+print(f"Result {result}")
